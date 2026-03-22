@@ -46,7 +46,6 @@ body {
     display: flex;
     justify-content: center;
     overflow-x: hidden;
-    /* Prevent horizontal scroll from animations */
 }
 
 .container {
@@ -150,7 +149,6 @@ header {
 .social-links {
     display: flex;
     flex-direction: row;
-    /* Horizontal on desktop */
     gap: 1rem;
     margin-top: 0;
 }
@@ -189,7 +187,6 @@ header {
     font-size: 5rem;
     line-height: 0.85;
     color: rgba(255, 255, 255, 0.03);
-    /* Subtle background text */
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
     pointer-events: none;
     user-select: none;
@@ -202,7 +199,8 @@ header {
 /* --- Terminal Styling --- */
 .terminal-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    /* ← всі термінали в одну колонку */
     gap: 1.5rem;
     width: 100%;
 }
@@ -215,20 +213,12 @@ header {
     border-radius: 12px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    margin-bottom: 0;
-    /* Remove margin-bottom as grid handles gap */
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
 
-    /* Animation Fade In */
     opacity: 0;
     animation: fadeUp 0.8s ease-out forwards;
-}
-
-.terminal-window:nth-child(3) {
-    grid-column: span 2;
-    /* Make the third item (Achievements) span full width */
 }
 
 /* Stagger Animations */
@@ -305,7 +295,6 @@ header {
 .output {
     color: var(--text-primary);
     white-space: normal;
-    /* Handle line breaks via <br> only */
     line-height: 1.8;
 }
 
@@ -394,14 +383,11 @@ strong {
         gap: 2rem;
         padding-bottom: 2rem;
         align-items: center;
-        /* Center items in flex column */
         text-align: center;
-        /* Center text */
     }
 
     .header-left {
         align-items: center;
-        /* Center children of header-left */
         width: 100%;
     }
 
@@ -415,25 +401,15 @@ strong {
 
     .header-right {
         display: none;
-        /* Hide huge text on mobile */
     }
 
     .nickname {
         font-size: 3rem;
     }
 
-    .terminal-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .terminal-window:nth-child(3) {
-        grid-column: auto;
-    }
-
     .social-links {
         flex-wrap: wrap;
         justify-content: center;
-        /* Center social links */
     }
 
     .terminal-content {

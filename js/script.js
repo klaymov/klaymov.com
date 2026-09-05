@@ -37,4 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     reveals.forEach(el => observer.observe(el));
+
+    // ===== Cursor Spotlight =====
+    let ticking = false;
+    document.addEventListener('mousemove', (e) => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+            document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+            ticking = false;
+        });
+    });
+
+    document.addEventListener('mouseleave', () => {
+        document.body.style.setProperty('--mouse-x', '-1000px');
+        document.body.style.setProperty('--mouse-y', '-1000px');
+    });
 });

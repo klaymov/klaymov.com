@@ -1,56 +1,40 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const terminals = document.querySelectorAll('.terminal-window');
+document.addEventListener('DOMContentLoaded', () => {
 
-    terminals.forEach(term => {
-        const stackRows = term.querySelectorAll('.stack-row');
-        if (stackRows.length > 0) {
-            stackRows.forEach(el => el.style.opacity = '0');
-        } else {
-            term.querySelectorAll('.output').forEach(el => el.style.opacity = '0');
-        }
+    // ===== Theme Toggle =====
+    const toggle = document.querySelector('.theme-toggle');
+
+    toggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
     });
 
-    const typeText = async (element, text, speed = 33) => { // 50 / 1.5 ≈ 33
-        element.textContent = '';
-        return new Promise(resolve => {
-            let i = 0;
-            const timer = setInterval(() => {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, speed);
+    // ===== Scroll Reveal =====
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add('revealed');
+
+            // Stagger children
+            const items = entry.target.querySelectorAll('.stagger');
+            items.forEach((item, i) => {
+                item.style.transitionDelay = `${i * 0.1}s`;
+                // Trigger on next frame so delay applies
+                requestAnimationFrame(() => {
+                    item.classList.add('revealed');
+                });
+            });
+
+            observer.unobserve(entry.target);
         });
-    };
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px'
+    });
 
-    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-    for (const term of terminals) {
-        const typewriter = term.querySelector('.typewriter');
-        const text = typewriter.getAttribute('data-text');
-
-        await sleep(200); // 300 / 1.5
-        await typeText(typewriter, text, 33);
-        await sleep(100); // 150 / 1.5
-
-        const stackRows = term.querySelectorAll('.stack-row');
-        if (stackRows.length > 0) {
-            for (const row of stackRows) {
-                row.style.transition = 'opacity 0.27s ease'; // 0.4s / 1.5
-                row.style.opacity = '1';
-                await sleep(53); // 80 / 1.5
-            }
-            continue;
-        }
-
-        const outputs = term.querySelectorAll('.output');
-        for (const output of outputs) {
-            output.style.transition = 'opacity 0.33s ease'; // 0.5s / 1.5
-            output.style.opacity = '1';
-            await sleep(100); // 150 / 1.5
-        }
-    }
+    reveals.forEach(el => observer.observe(el));
 });

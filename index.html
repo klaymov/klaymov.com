@@ -9,144 +9,139 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css?v=1.1">
+    <link rel="stylesheet" href="css/style.css?v=2.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem('theme') ||
+                (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 
 <body>
 
-    <div class="container">
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
 
-        <header>
-            <div class="header-left">
-                <div class="nickname-container">
-                    <div class="nickname">klaymov</div>
-                    <div class="role">Full-stack Developer</div>
-                    <div class="location">Vinnytsia, Ukraine</div>
-                </div>
-                <div class="social-links">
-                    <a href="https://t.me/klaymov" target="_blank">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://github.com/klaymov" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <div class="email-row">
-                        <i class="fas fa-envelope"></i> hi@klaymov.com
-                    </div>
-                </div>
+    <!-- Hero -->
+    <section class="hero">
+        <h1 class="hero-name">klaymov</h1>
+        <p class="hero-role">Full-stack Developer</p>
+        <p class="hero-location">Vinnytsia, Ukraine</p>
+        <div class="hero-links">
+            <a href="https://t.me/klaymov" target="_blank" class="pill-btn">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            <a href="https://github.com/klaymov" target="_blank" class="pill-btn">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
+        <p class="hero-email">hi@klaymov.com</p>
+    </section>
+
+    <!-- About -->
+    <section class="about reveal">
+        <h2 class="section-title">About</h2>
+        <p class="about-text">I'm Serhii, a 20-year-old full-stack Python developer with 3+ years of experience
+            building production-ready code for backend services and Telegram bots used by millions.
+            During this time, I've completed 100+ projects and built 30+ Telegram bots.</p>
+    </section>
+
+    <!-- Project -->
+    <section class="project reveal">
+        <h2 class="section-title">Project</h2>
+        <div class="project-card">
+            <h3 class="project-name">Quicks</h3>
+            <p class="project-desc">Search and download videos, photos, or music from TikTok, Instagram, YT Music,
+                and other platforms in one click!</p>
+            <a href="https://t.me/quicksbot" target="_blank" class="pill-btn pill-btn--accent">
+                Open in Telegram →
+            </a>
+        </div>
+    </section>
+
+    <!-- Stack -->
+    <section class="stack reveal">
+        <h2 class="section-title">Stack</h2>
+        <div class="stack-grid">
+            <div class="stack-group stagger">
+                <h4>Backend</h4>
+                <ul>
+                    <li>Python</li>
+                    <li>FastAPI</li>
+                    <li>Django</li>
+                </ul>
             </div>
-
-            <div class="header-right">
-                <span>LETS</span>
-                <span>BUILD</span>
-                <span>SOMETHING</span>
+            <div class="stack-group stagger">
+                <h4>Frontend</h4>
+                <ul>
+                    <li>React</li>
+                    <li>Next.js</li>
+                    <li>Vite</li>
+                    <li>Tailwind CSS</li>
+                </ul>
             </div>
-        </header>
+            <div class="stack-group stagger">
+                <h4>AI / LLM</h4>
+                <ul>
+                    <li>OpenAI</li>
+                    <li>Claude</li>
+                    <li>Gemini</li>
+                    <li>Qwen</li>
+                </ul>
+            </div>
+            <div class="stack-group stagger">
+                <h4>Telegram</h4>
+                <ul>
+                    <li>Aiogram</li>
+                    <li>TDLib</li>
+                    <li>MTProto</li>
+                    <li>Mini Apps</li>
+                </ul>
+            </div>
+            <div class="stack-group stagger">
+                <h4>Data</h4>
+                <ul>
+                    <li>MongoDB</li>
+                    <li>Redis</li>
+                    <li>PostgreSQL</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        <main class="terminal-grid">
-            <section class="terminal-window">
-                <div class="terminal-bar">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                </div>
-                <div class="terminal-content">
-                    <div class="command-line">
-                        <span class="prompt-sign">$</span>
-                        <span class="typewriter" data-text="cat about-me.txt"></span>
-                    </div>
-                    <div class="output">I'm Serhii, a 20-year-old full-stack Python developer with 3+ years of
-                        experience
-                        building production-ready code for backend services and Telegram bots used by millions.<br>
-                        During this time, I’ve completed 100+ projects and built 30+ Telegram bots.</div>
-                </div>
-            </section>
+    <!-- Timeline -->
+    <section class="timeline reveal">
+        <h2 class="section-title">Journey</h2>
+        <div class="timeline-list">
+            <div class="timeline-item stagger">
+                <span class="timeline-year">2026</span>
+                <p class="timeline-desc">Developing my own bots and projects that generate significant revenue.</p>
+            </div>
+            <div class="timeline-item stagger">
+                <span class="timeline-year">2025</span>
+                <p class="timeline-desc">Built custom APIs with full authentication and detailed documentation.</p>
+            </div>
+            <div class="timeline-item stagger">
+                <span class="timeline-year">2024</span>
+                <p class="timeline-desc">Created and launched several Telegram bots handling over a thousand requests
+                    daily.</p>
+            </div>
+            <div class="timeline-item stagger">
+                <span class="timeline-year">2023</span>
+                <p class="timeline-desc">Mastered the full Python stack: backend, APIs, databases, and deployment.</p>
+            </div>
+        </div>
+    </section>
 
-            <section class="terminal-window">
-                <div class="terminal-bar">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                </div>
-                <div class="terminal-content">
-                    <div class="command-line">
-                        <span class="prompt-sign">$</span>
-                        <span class="typewriter" data-text="cat projects.txt"></span>
-                    </div>
-                    <div class="output"><strong>• <a href="https://t.me/quicksbot" target="_blank"
-                                class="highlight-link">Quicks</a></strong> - Search and download videos, photos, or
-                        music from TikTok, Instagram, YT Music, and other platforms in one click!
-                    </div>
-                </div>
-            </section>
-
-            <section class="terminal-window">
-                <div class="terminal-bar">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                </div>
-                <div class="terminal-content">
-                    <div class="command-line">
-                        <span class="prompt-sign">$</span>
-                        <span class="typewriter" data-text="cat stack.txt"></span>
-                    </div>
-                    <div class="output stack-table">
-                        <div class="stack-row">
-                            <span class="stack-category">Backend –</span>
-                            <span class="stack-items">Python, FastAPI, Django</span>
-                        </div>
-                        <div class="stack-row">
-                            <span class="stack-category">Frontend –</span>
-                            <span class="stack-items">React, Next.js, Vite, Tailwind CSS</span>
-                        </div>
-                        <div class="stack-row">
-                            <span class="stack-category">AI/LLM –</span>
-                            <span class="stack-items">OpenAI, Claude, Gemini, Qwen</span>
-                        </div>
-                        <div class="stack-row">
-                            <span class="stack-category">Telegram –</span>
-                            <span class="stack-items">Aiogram, TDLib, MTProto, Mini Apps</span>
-                        </div>
-                        <div class="stack-row">
-                            <span class="stack-category">Data –</span>
-                            <span class="stack-items">MongoDB, Redis, PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="terminal-window">
-                <div class="terminal-bar">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                </div>
-                <div class="terminal-content">
-                    <div class="command-line">
-                        <span class="prompt-sign">$</span>
-                        <span class="typewriter" data-text="cat achievements.txt"></span><span class="cursor"></span>
-                    </div>
-                    <div class="output"><strong>2026</strong> – Developing my own bots and projects that generate
-                        significant revenue.<br>
-                        <strong>2025</strong> – Built custom APIs with full authentication and detailed
-                        documentation.<br>
-                        <strong>2024</strong> – Created and launched several Telegram bots handling over a thousand
-                        requests daily.<br>
-                        <strong>2023</strong> – Mastered the full Python stack: backend, APIs, databases, and
-                        deployment.
-                    </div>
-                </div>
-            </section>
-        </main>
-
-    </div>
-
-    <script src="js/script.js?v=1.1"></script>
+    <script src="js/script.js?v=2.0"></script>
 </body>
 
 </html>

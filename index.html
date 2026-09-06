@@ -11,24 +11,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="css/style.css?v=3.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        (function () {
-            var t = localStorage.getItem('theme') ||
-                (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-            document.documentElement.setAttribute('data-theme', t);
-        })();
-    </script>
 </head>
 
 <body>
 
-    <button class="theme-toggle" aria-label="Toggle theme">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-    </button>
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="nav-bar">
+            <a href="#" class="nav-logo">klaymov</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#project">Project</a>
+                <a href="#stack">Stack</a>
+                <a href="#journey">Journey</a>
+            </div>
+            <a href="https://t.me/klaymov" target="_blank" class="nav-cta">
+                <span class="nav-cta-icon">→</span>
+                Contact me
+            </a>
+            <button class="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-links">
+            <a href="#about">About</a>
+            <a href="#project">Project</a>
+            <a href="#stack">Stack</a>
+            <a href="#journey">Journey</a>
+            <a href="https://t.me/klaymov" target="_blank" class="nav-cta mobile-cta">
+                <span class="nav-cta-icon">→</span>
+                Contact me
+            </a>
+        </div>
+    </div>
 
     <!-- Hero -->
     <section class="hero">
@@ -47,7 +70,7 @@
     </section>
 
     <!-- About -->
-    <section class="about reveal">
+    <section id="about" class="about reveal">
         <h2 class="section-title">About</h2>
         <p class="about-text">I'm Serhii, a 20-year-old full-stack Python developer with 3+ years of experience
             building production-ready code for backend services and Telegram bots used by millions.
@@ -55,7 +78,7 @@
     </section>
 
     <!-- Project -->
-    <section class="project reveal">
+    <section id="project" class="project reveal">
         <h2 class="section-title">Project</h2>
         <div class="project-card">
             <h3 class="project-name">Quicks</h3>
@@ -68,7 +91,7 @@
     </section>
 
     <!-- Stack -->
-    <section class="stack reveal">
+    <section id="stack" class="stack reveal">
         <h2 class="section-title">Stack</h2>
         <div class="stack-grid">
             <div class="stack-group stagger">
@@ -118,7 +141,7 @@
     </section>
 
     <!-- Timeline -->
-    <section class="timeline reveal">
+    <section id="journey" class="timeline reveal">
         <h2 class="section-title">Journey</h2>
         <div class="timeline-list">
             <div class="timeline-item stagger">
@@ -141,7 +164,22 @@
         </div>
     </section>
 
-    <script src="js/script.js?v=2.0"></script>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span class="footer-logo">klaymov</span>
+                <p class="footer-copy">© 2026 klaymov. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://t.me/klaymov" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="https://github.com/klaymov" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                <a href="mailto:hi@klaymov.com"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=3.0"></script>
 </body>
 
 </html>

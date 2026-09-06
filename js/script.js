@@ -27,12 +27,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reveals.forEach(el => observer.observe(el));
 
-    // ===== Cursor Spotlight (Desktop) =====
+    // ===== Cursor Spotlight =====
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (!isTouchDevice) {
-        // Desktop: follow mouse
+        // Desktop: follow mouse, fade out when idle
         let ticking = false;
+        let idleTimer = null;
+
+        // Start hidden
+        document.body.style.setProperty('--glow-opacity', '0');
+
+        const showGlow = () => {
+            document.body.style.setProperty('--glow-opacity', '1');
+        };
+
+        const hideGlow = () => {
+            document.body.style.setProperty('--glow-opacity', '0');
+        };
+
+        const resetIdleTimer = () => {
+            if (idleTimer) clearTimeout(idleTimer);
+            showGlow();
+            idleTimer = setTimeout(hideGlow, 2000);
+        };
+
         document.addEventListener('mousemove', (e) => {
             if (ticking) return;
             ticking = true;
@@ -41,18 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.setProperty('--mouse-y', e.clientY + 'px');
                 ticking = false;
             });
+            resetIdleTimer();
         });
 
         document.addEventListener('mouseleave', () => {
-            document.body.style.setProperty('--mouse-x', '-1000px');
-            document.body.style.setProperty('--mouse-y', '-1000px');
+            if (idleTimer) clearTimeout(idleTimer);
+            hideGlow();
+            // Move off-screen after fade
+            setTimeout(() => {
+                document.body.style.setProperty('--mouse-x', '-1000px');
+                document.body.style.setProperty('--mouse-y', '-1000px');
+            }, 800);
+        });
+
+        document.addEventListener('mouseenter', (e) => {
+            document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+            document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+            showGlow();
+            resetIdleTimer();
         });
     } else {
-        // Mobile: show on touch, fade out after release
+        // Mobile: show on touch, smooth fade out after release
         let fadeTimer = null;
 
         // Start hidden on mobile
         document.body.style.setProperty('--glow-opacity', '0');
+        document.body.style.setProperty('--mouse-x', '-1000px');
+        document.body.style.setProperty('--mouse-y', '-1000px');
 
         document.addEventListener('touchstart', (e) => {
             if (fadeTimer) {
@@ -61,9 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const touch = e.touches[0];
+            // Set position first, then fade in
             document.body.style.setProperty('--mouse-x', touch.clientX + 'px');
             document.body.style.setProperty('--mouse-y', touch.clientY + 'px');
-            document.body.style.setProperty('--glow-opacity', '1');
+            // Small delay so position is set before opacity transition starts
+            requestAnimationFrame(() => {
+                document.body.style.setProperty('--glow-opacity', '1');
+            });
         }, { passive: true });
 
         document.addEventListener('touchmove', (e) => {
@@ -75,15 +113,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
 
         document.addEventListener('touchend', () => {
-            // Wait a bit, then fade out
+            // Fade out smoothly after a pause
             fadeTimer = setTimeout(() => {
                 document.body.style.setProperty('--glow-opacity', '0');
-                // After fade completes, move off-screen
-                setTimeout(() => {
+                // Move off-screen only after CSS transition finishes
+                fadeTimer = setTimeout(() => {
                     document.body.style.setProperty('--mouse-x', '-1000px');
                     document.body.style.setProperty('--mouse-y', '-1000px');
-                }, 800);
-            }, 600);
+                }, 1000);
+            }, 800);
         }, { passive: true });
     }
 
@@ -96,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
         burger.addEventListener('click', () => {
             burger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         });
 
         // Close on link click
@@ -104,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', () => {
                 burger.classList.remove('active');
                 mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
             });
         });
     }
